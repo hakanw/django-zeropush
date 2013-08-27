@@ -1,15 +1,15 @@
-from distutils.core import setup, find_packages
-
+# encoding: utf-8
+from setuptools import setup, find_packages
 setup(
     name='django-zeropush',
     version='0.2.0',
     author=u'Håkan Waara',
     author_email='hwaara@gmail.com',
     packages=find_packages(),
-    url='http://github.com/hakanw/django-zeropush',
+    url='https://github.com/hakanw/django-zeropush',
     license='BSD licence, see LICENCE.txt',
-    description='ZeroPush iOS push notifications support for django'
+    description='ZeroPush iOS push notifications support for django',
     #long_description=open('README.txt').read(),
-    install_requires = ['requests'],
+    install_requires=['requests'],
     zip_safe=False,
 )
