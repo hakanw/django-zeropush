@@ -1,0 +1,2 @@
+* Make this into a proper package
+* Make it depend on python requests
