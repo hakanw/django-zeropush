@@ -33,5 +33,5 @@ def notify_devices(devices, alert=None, sound=None, badge_number=None):
     return False
 
 def notify_user(user, alert=None, sound=None, badge_number=None):
-    return send_notification_to_devices(user.pushdevice_set.all(), alert=alert, sound=sound, badge_number=badge_number)
+    return notify_devices(user.pushdevice_set.all(), alert=alert, sound=sound, badge_number=badge_number)
 
