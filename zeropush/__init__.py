@@ -27,7 +27,7 @@ def notify_devices(devices, alert=None, sound=None, badge_number=None):
             log.info("Push successfully sent to zeropush for user %s" % user)
             return True
         else:
-            log.error("Error! Push failed to be sent to zeropush for user %s! Error response: %s" % (user, response.text))
+            log.error("Error! Push failed to be sent to zeropush! Error response: %s" % response.text)
             return False
             
     return False
