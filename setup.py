@@ -2,7 +2,7 @@
 from setuptools import setup, find_packages
 setup(
     name='django-zeropush',
-    version='0.2.2',
+    version='0.2.3',
     author=u'Håkan Waara',
     author_email='hwaara@gmail.com',
     packages=find_packages(),

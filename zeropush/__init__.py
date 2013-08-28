@@ -24,7 +24,7 @@ def notify_devices(devices, alert=None, sound=None, badge_number=None):
             
         response = requests.post(ZEROPUSH_NOTIFY_URL, params)
         if response.ok:
-            log.info("Push successfully sent to zeropush for user %s" % user)
+            log.info("Push successfully sent to zeropush")
             return True
         else:
             log.error("Error! Push failed to be sent to zeropush! Error response: %s" % response.text)
