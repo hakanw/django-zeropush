@@ -23,6 +23,7 @@ zeropush.notify_user(the_user, alert="Here's some notification text", sound="def
 
 ## Getting all users' push devices and sending a notification to all of them
 ```python
+import zeropush
 from zeropush.models import PushDevice
 
 # PushDevice is a model in django-zeropush that has a device token (string) and is connected to a django user.
