@@ -1,11 +1,11 @@
 django-zeropush
 ===============
 
-A django app that helps you implement [ZeroPush](http://zeropush.com) push notification support in your Android or iOS app, connected to your django backend.
+A django app that helps you use [ZeroPush](http://zeropush.com)'s push notification API simply in your django backend for a Android or iOS app.
 
 # django-zeropush features
 
-1. a simple HTTP interface for adding new push devices for a logged in user
+1. a simple HTTP POST interface for adding new push devices connected to the current django user session
 2. easy to use methods for sending push notifications to a user's all devices /or/ a group of specific devices
 3. a PushDevice model that is connected to django's built-in user model (and also works with django 1.5+ custom user models)
 
@@ -40,7 +40,7 @@ zeropush.notify_devices(all_devices, alert="Here's some text to all users")
 
 # The HTTP API for adding new push tokens
 
-Once you've added zeropush.urls to your `urls.py` file, you'll be able to POST to `/zeropush/add_device/` with a parameter `token` which is the device token string. This will create a new PushDevice object that associates the currently logged in user session with a device.
+Once you've added `zeropush.urls` to your `urls.py` file, a logged in user session can POST to `/zeropush/add_device/` with a parameter `token` which is the device token string to a new `PushDevice` object that associates the current django user with a specific device token.
 
 
 
