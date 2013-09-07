@@ -35,9 +35,10 @@ zeropush.notify_devices(all_devices, alert="Here's some text to all users")
 # Installation
 
 1. Add `zeropush` to your `INSTALLED_APPS` in your project's `settings.py`
-2. Include `zeropush.urls` to your `urls.py` if you want a HTTP POST API for adding a push device token to a logged in user. See below for how to POST to it.
-3. Run `./manage.py syncdb` to create the PushDevice model's table.
-4. Now you can send push notifications as above!
+2. Add `ZEROPUSH_AUTH_TOKEN="YOUR API TOKEN HERE"` to your `settings.py`
+3. Include `zeropush.urls` to your `urls.py` if you want a HTTP POST API for adding a push device token to a logged in user. See below for how to POST to it.
+4. Run `./manage.py syncdb` to create the PushDevice model's table.
+5. Now you can send push notifications as above!
 
 # The HTTP API for adding new push tokens
 
