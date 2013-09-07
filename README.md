@@ -1,7 +1,7 @@
 django-zeropush
 ===============
 
-A django app that helps you use [ZeroPush](http://zeropush.com)'s push notification API simply in your django backend for a Android or iOS app.
+A django app that helps you use [ZeroPush](http://zeropush.com)'s push notification API simply in your django backend for an iOS app.
 
 # django-zeropush features
 
