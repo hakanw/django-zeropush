@@ -36,8 +36,6 @@ class Migration(SchemaMigration):
         # Adding model 'PushDevice'
         db.create_table(u'zeropush_pushdevice', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('modified', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm[AUTH_USER_MODEL])),
             ('token', self.gf('django.db.models.fields.CharField')(max_length=255, db_index=True)),
         ))
@@ -127,9 +125,7 @@ class Migration(SchemaMigration):
         },
         u'zeropush.pushdevice': {
             'Meta': {'unique_together': "(('user', 'token'),)", 'object_name': 'PushDevice'},
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'token': ('django.db.models.fields.CharField', [], {'max_length': '255', 'db_index': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['%s']" % AUTH_USER_MODEL})
         }
