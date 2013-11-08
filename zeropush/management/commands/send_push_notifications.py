@@ -1,6 +1,6 @@
 # encoding: utf-8
 from django.core.management.base import NoArgsCommand, CommandError
-from app.models import DelayedPushNotification
+from zeropush.models import DelayedPushNotification
 
 class Command(NoArgsCommand):
     help = 'Sends all unsent push notifications'
