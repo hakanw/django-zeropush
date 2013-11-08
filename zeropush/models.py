@@ -21,7 +21,7 @@ class PushDevice(MutableModel):
     token = models.CharField("Device token string", max_length=255, db_index=True)
     
     def __unicode__(self):
-        return u"UserDevice %s: %s" % (self.token, user.username)
+        return u"UserDevice %s: %s" % (self.token, self.user.username)
         
     class Meta:
         unique_together = ('user', 'token')
