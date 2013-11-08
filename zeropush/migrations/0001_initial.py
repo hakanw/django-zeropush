@@ -44,22 +44,6 @@ class Migration(SchemaMigration):
         # Adding unique constraint on 'PushDevice', fields ['user', 'token']
         db.create_unique(u'zeropush_pushdevice', ['user_id', 'token'])
 
-        # Adding model 'DelayedPushNotification'
-        db.create_table(u'zeropush_delayedpushnotification', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
-            ('modified', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
-            ('to_user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm[AUTH_USER_MODEL])),
-            ('alert', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
-            ('sound', self.gf('django.db.models.fields.CharField')(max_length=100, null=True, blank=True)),
-            ('info', self.gf('django.db.models.fields.CharField')(max_length=512, null=True, blank=True)),
-            ('sent', self.gf('django.db.models.fields.BooleanField')(default=False, db_index=True)),
-            ('num_tries', self.gf('django.db.models.fields.IntegerField')(default=0)),
-            ('error', self.gf('django.db.models.fields.CharField')(max_length=255, blank=True)),
-            ('expired', self.gf('django.db.models.fields.BooleanField')(default=False)),
-        ))
-        db.send_create_signal(u'zeropush', ['DelayedPushNotification'])
-
 
     def backwards(self, orm):
         # Removing unique constraint on 'PushDevice', fields ['user', 'token']
@@ -68,27 +52,24 @@ class Migration(SchemaMigration):
         # Deleting model 'PushDevice'
         db.delete_table(u'zeropush_pushdevice')
 
-        # Deleting model 'DelayedPushNotification'
-        db.delete_table(u'zeropush_delayedpushnotification')
-
 
     models = {
         AUTH_USER_MODEL: {
-                    'Meta': AUTH_USER_META,
-                    'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-                    'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
-                    'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-                    'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
-                    'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-                    'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
-                    'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
-                    'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
-                    'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
-                    'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
-                    'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
-                    'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
-                    'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
-                },
+            'Meta': AUTH_USER_META,
+            'date_joined': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'email': ('django.db.models.fields.EmailField', [], {'max_length': '75', 'blank': 'True'}),
+            'first_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
+            'groups': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Group']", 'symmetrical': 'False', 'blank': 'True'}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True', 'blank': 'True'}),
+            'is_staff': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
+            'is_superuser': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'blank': 'True'}),
+            'last_login': ('django.db.models.fields.DateTimeField', [], {'default': 'datetime.datetime.now'}),
+            'last_name': ('django.db.models.fields.CharField', [], {'max_length': '30', 'blank': 'True'}),
+            'password': ('django.db.models.fields.CharField', [], {'max_length': '128'}),
+            'user_permissions': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.Permission']", 'symmetrical': 'False', 'blank': 'True'}),
+            'username': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '30'})
+        },
         u'auth.group': {
             'Meta': {'object_name': 'Group'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
@@ -109,25 +90,11 @@ class Migration(SchemaMigration):
             'model': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
-        u'zeropush.delayedpushnotification': {
-            'Meta': {'object_name': 'DelayedPushNotification'},
-            'alert': ('django.db.models.fields.CharField', [], {'max_length': '255', 'null': 'True', 'blank': 'True'}),
-            'created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'error': ('django.db.models.fields.CharField', [], {'max_length': '255', 'blank': 'True'}),
-            'expired': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'info': ('django.db.models.fields.CharField', [], {'max_length': '512', 'null': 'True', 'blank': 'True'}),
-            'modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
-            'num_tries': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'sent': ('django.db.models.fields.BooleanField', [], {'default': 'False', 'db_index': 'True'}),
-            'sound': ('django.db.models.fields.CharField', [], {'max_length': '100', 'null': 'True', 'blank': 'True'}),
-            'to_user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['%s']" % AUTH_USER_MODEL})
-        },
         u'zeropush.pushdevice': {
             'Meta': {'unique_together': "(('user', 'token'),)", 'object_name': 'PushDevice'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'token': ('django.db.models.fields.CharField', [], {'max_length': '255', 'db_index': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['%s']" % AUTH_USER_MODEL})
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['%s']" % AUTH_USER_MODEL})
         }
     }
 

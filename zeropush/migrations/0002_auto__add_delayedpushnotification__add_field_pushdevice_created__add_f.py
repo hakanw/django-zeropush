@@ -8,6 +8,22 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
+        # Adding model 'DelayedPushNotification'
+        db.create_table(u'zeropush_delayedpushnotification', (
+            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('created', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
+            ('modified', self.gf('django.db.models.fields.DateTimeField')(auto_now=True, blank=True)),
+            ('to_user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['app.VoolewooUser'])),
+            ('alert', self.gf('django.db.models.fields.CharField')(max_length=255, null=True, blank=True)),
+            ('sound', self.gf('django.db.models.fields.CharField')(max_length=100, null=True, blank=True)),
+            ('info', self.gf('django.db.models.fields.CharField')(max_length=512, null=True, blank=True)),
+            ('sent', self.gf('django.db.models.fields.BooleanField')(default=False, db_index=True)),
+            ('num_tries', self.gf('django.db.models.fields.IntegerField')(default=0)),
+            ('error', self.gf('django.db.models.fields.CharField')(max_length=255, blank=True)),
+            ('expired', self.gf('django.db.models.fields.BooleanField')(default=False)),
+        ))
+        db.send_create_signal(u'zeropush', ['DelayedPushNotification'])
+
         # Adding field 'PushDevice.created'
         db.add_column(u'zeropush_pushdevice', 'created',
                       self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, default=datetime.datetime(2013, 11, 8, 0, 0), blank=True),
@@ -20,6 +36,9 @@ class Migration(SchemaMigration):
 
 
     def backwards(self, orm):
+        # Deleting model 'DelayedPushNotification'
+        db.delete_table(u'zeropush_delayedpushnotification')
+
         # Deleting field 'PushDevice.created'
         db.delete_column(u'zeropush_pushdevice', 'created')
 

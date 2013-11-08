@@ -1,10 +1,9 @@
 # encoding: utf-8
 import logging
+import sys
 
 from django.db import models
 from django.conf import settings
-
-log = logging.getLogger(__name__)
 
 class MutableModel(models.Model):
     # automatic metadata
@@ -43,18 +42,21 @@ class DelayedPushNotification(MutableModel):
     expired = models.BooleanField(default=False)
 
     def deliver(self):
+        # included here to avoid circular import
+        from communication import notify_user
+        
         success = False
-        log.info("trying to deliver delayed push notification ID %d to %s", self.id, self.user.username)
+        logging.info("trying to deliver delayed push notification ID %d to %s", self.id, self.to_user.username)
         try:
-            success = zeropush.notify_user(self.user, alert=self.alert, sound=self.sound, info=info)
+            success = notify_user(self.to_user, alert=self.alert, sound=self.sound, info=self.info)
         except:
             self.error = sys.exc_info()
-            log.error(sys.exc_info())
+            logging.error(sys.exc_info())
         finally:
             self.num_tries += 1
             
             if success:
-                log.info("sent successfully (try %d)!", self.num_tries)
+                logging.info("sent successfully (try %d)!", self.num_tries)
                 self.sent = True
             else:
                 # expire after 5 unsuccessful delivery attempts
