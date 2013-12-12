@@ -1,6 +1,7 @@
 # encoding: utf-8
 import logging
 import sys
+import json
 
 from django.db import models
 from django.conf import settings
@@ -33,8 +34,17 @@ class DelayedPushNotification(MutableModel):
     # payload
     alert = models.CharField(blank=True, null=True, max_length=255)
     sound = models.CharField(blank=True, null=True, max_length=100)
-    info = models.CharField(blank=True, null=True, max_length=512)
-    
+    info_json = models.CharField(blank=True, null=True, max_length=512)
+
+    @property
+    def info(self):
+        if self.info_json:
+            return json.loads(self.info_json)
+
+    @info.setter
+    def set_info(self, data):
+        self.info_json = json.dumps(data)
+
     # sent status
     sent = models.BooleanField(default=False, db_index=True)
     num_tries = models.IntegerField(default=0)
@@ -44,7 +54,7 @@ class DelayedPushNotification(MutableModel):
     def deliver(self):
         # included here to avoid circular import
         from communication import notify_user
-        
+
         success = False
         logging.info("trying to deliver delayed push notification ID %d to %s", self.id, self.to_user.username)
         try:
