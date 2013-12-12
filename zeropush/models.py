@@ -36,14 +36,13 @@ class DelayedPushNotification(MutableModel):
     sound = models.CharField(blank=True, null=True, max_length=100)
     info_json = models.CharField(blank=True, null=True, max_length=512)
 
-    @property
-    def info(self):
+    def get_info(self):
         if self.info_json:
             return json.loads(self.info_json)
-
-    @info.setter
     def set_info(self, data):
         self.info_json = json.dumps(data)
+
+    info = property(get_info, set_info)
 
     # sent status
     sent = models.BooleanField(default=False, db_index=True)
