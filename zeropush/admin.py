@@ -3,7 +3,7 @@ from models import DelayedPushNotification, PushDevice
 
 class DelayedPushNotificationAdmin(admin.ModelAdmin):
     list_display = ["created", "to_user", "alert", "num_tries", "sent"]
-    readonly_fields = ["to_user", "alert", "sound", "sent", "num_tries", "error", "created", "expired", "info"]
+    readonly_fields = ["to_user", "alert", "sound", "sent", "num_tries", "error", "created", "expired", "info_json"]
 
 class PushDeviceAdmin(admin.ModelAdmin):
     pass
