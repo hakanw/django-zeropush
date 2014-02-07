@@ -32,6 +32,10 @@ AUTH_USER_META.update({'object_name': AUTH_USER_MODEL.split('.')[-1]})
 
 class Migration(SchemaMigration):
 
+    depends_on = (
+        (AUTH_USER_MODEL.split(".")[0], "0001_initial"),
+    )
+
     def forwards(self, orm):
         # Adding model 'PushDevice'
         db.create_table(u'zeropush_pushdevice', (
