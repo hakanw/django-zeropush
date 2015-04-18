@@ -24,3 +24,21 @@ def add_user_device(request):
         
         # bad request!
         return HttpResponse(status=400)
+
+def add_anonymous_device(request):
+    token_string = request.POST.get("token", None)
+    if token_string:
+        device, created = PushDevice.objects.get_or_create(token=token_string)
+        
+        if created:
+            # associate device with user
+            logging.info("New device (%s) added for anonymous user" % (device.token,))
+            
+        # success
+        return HttpResponse(status=200)
+    else:
+        logging.error("Can't add push device with empty token!")
+        
+        # bad request!
+        return HttpResponse(status=400)
+
