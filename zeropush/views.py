@@ -31,7 +31,6 @@ def add_anonymous_device(request):
         device, created = PushDevice.objects.get_or_create(token=token_string)
         
         if created:
-            # associate device with user
             logging.info("New device (%s) added for anonymous user" % (device.token,))
             
         # success

@@ -13,3 +13,5 @@ Changed in 0.4.0:
     	* Now finally has migrations and is compatible with modern django. For users that already use django-zeropush: I *think* the initial migration should be in your DB already, and the rest should be run. But please do this migration with caution.
 
     	* The urls.py now doesn't include the 'zeropush' prefix on all URLs. Please include the urls.py from zeropush with that prefix if you still want it.
+
+    	* The old deprecated `add_device` URL has been removed. Please use the equivalent `add_current_user_device` URL instead.

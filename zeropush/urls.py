@@ -10,7 +10,4 @@ urlpatterns = patterns('',
     # remember to include CSRF token, if you have CSRF middleware turned on in your settings.
     # no need to be logged in to use this POST API.
     url(r'^add_anonymous_device/$', 'zeropush.views.add_anonymous_device'),
-
-    # deprecated URL, please use one of the options above.
-    url(r'^add_device/$', 'zeropush.views.add_user_device'),
 )
