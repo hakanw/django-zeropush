@@ -4,7 +4,6 @@ import json
 import requests
 
 from django.conf import settings
-from models import PushDevice
 
 ZEROPUSH_NOTIFY_URL = "https://api.zeropush.com/notify"
 
