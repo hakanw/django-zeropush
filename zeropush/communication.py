@@ -18,7 +18,7 @@ def notify_devices(devices, alert=None, sound=None, badge_number=None, info=None
         if sound is not None:
             params.update({ "sound": sound })
         if badge_number is not None:
-            params.update({ "badge_number": badge_number })
+            params.update({ "badge": badge_number })
         if info is not None:
             params.update({ "info": json.dumps(info) })
             
