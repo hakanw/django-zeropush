@@ -1,17 +1,18 @@
 Changed in 0.4.0:
 
-    * Finally a CHANGELOG. 
+	* Finally a CHANGELOG. 
 
 	* A new DelayedPushNotification model can be used to create notifications that can be sent asynchronously via a new ./manage.py send_push_notifications command!
 
 	* Support for push notifications to "anonymous" devices. That is, you don't have to use the django user system anymore.  Choose to push notifications to a list of devices, or a list of users (and their devices).
 
-    * Add support for custom JSON data to be sent via the "info" parameter.
+	* Add support for custom JSON data to be sent via the "info" parameter.
 
 
-    BACKWARDS-INCOMPATIBLE CHANGES:
-    	* Now finally has migrations and is compatible with modern django. For users that already use django-zeropush: I *think* the initial migration should be in your DB already, and the rest should be run. But please do this migration with caution.
+	BACKWARDS-INCOMPATIBLE CHANGES:
 
-    	* The urls.py now doesn't include the 'zeropush' prefix on all URLs. Please include the urls.py from zeropush with that prefix if you still want it.
+		* Now finally has migrations and is compatible with modern django. For users that already use django-zeropush: I *think* the initial migration should be in your DB already, and the rest should be run. But please do this migration with caution.
 
-    	* The old deprecated `add_device` URL has been removed. Please use the equivalent `add_current_user_device` URL instead.
+		* The urls.py now doesn't include the 'zeropush' prefix on all URLs. Please include the urls.py from zeropush with that prefix if you still want it.
+
+		* The old deprecated `add_device` URL has been removed. Please use the equivalent `add_current_user_device` URL instead.
